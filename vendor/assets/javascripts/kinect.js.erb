@@ -9,7 +9,7 @@
 // Create the global Kinect object
 var Kinect = (function () {
     "use strict";
-    
+
     //////////////////////////////////////////////////////////////
     // SocketManager object constructor
     //     SocketManager(uri, onmessage(socket,message) [, onconnection(isConnected)] )
@@ -55,7 +55,7 @@ var Kinect = (function () {
 
             // Initialize a new web socket.
             socket = new WebSocket(wsUri);
-            
+
             // Receive binary data as ArrayBuffer rather than Blob
             socket.binaryType = "arraybuffer";
 
@@ -64,7 +64,7 @@ var Kinect = (function () {
                 if (typeof onconnection == "function") {
                     onconnection(true);
                 }
-                
+
                 updateStatus("Connected to server.");
             };
 
@@ -73,7 +73,7 @@ var Kinect = (function () {
                 if (typeof onconnection == "function") {
                     onconnection(false);
                 }
-                
+
                 updateStatus("Connection closed.");
                 if (socketManager.isStarted) {
                     // Keep trying to reconnect as long as we're started
@@ -90,7 +90,7 @@ var Kinect = (function () {
 
         //////////////////////////////////////////////////////////////
         // Public SocketManager properties
-        
+
         // connection retry timeout, in milliseconds
         this.retryTimeout = 5000;
 
@@ -148,7 +148,7 @@ var Kinect = (function () {
 
         // Mapping between sensor names and KinectSensor objects
         var sensorMap = {};
-        
+
         // true if server requests to REST endpoint should be asynchronous
         var asyncRequests = true;
 
@@ -157,7 +157,7 @@ var Kinect = (function () {
         //////////////////////////////////////////////////////////////
         // KinectSensor object constructor
         //     KinectSensor(baseEndpointUri, onconnection(sensor, isConnected))
-        // 
+        //
         // baseEndpointUri: base URI for web endpoints corresponding to sensor
         // onconnection: Function to call back whenever status of connection to the
         //               server that owns this sensor changes from disconnected to
@@ -172,10 +172,10 @@ var Kinect = (function () {
 
             // true if sensor connection to server is currently enabled, false otherwise
             var isConnectionEnabled = false;
-            
+
             // Array of registered stream frame ready handlers
             var streamFrameHandlers = [];
-            
+
             // Header portion of a two-part stream message that is still missing a binary payload
             var pendingStreamFrame = null;
 
@@ -233,7 +233,7 @@ var Kinect = (function () {
                     sensor.isConnected = isConnected;
                     onconnection(sensor, isConnected);
                 });
-            
+
             // Array of registered event handlers
             var eventHandlers = [];
 
@@ -248,7 +248,7 @@ var Kinect = (function () {
 
             // Registered hit test handler
             var hitTestHandler = null;
-            
+
             var hitTestSocketManager = new SocketManager(baseEndpointUri + "/interaction/client", function (socket, message) {
                 // Get the data in JSON format.
                 var eventData = JSON.parse(message.data);
@@ -271,13 +271,13 @@ var Kinect = (function () {
 
                         socket.send(JSON.stringify({ "id": id, "result": ((handlerResult != null) ? handlerResult : defaultResult) }));
                         break;
-                    
+
                     case "ping":
                         socket.send(JSON.stringify({ "id": id, "result": true }));
                         break;
                 }
             });
-            
+
             //////////////////////////////////////////////////////////////
             // Private KinectSensor functions
 
@@ -296,7 +296,7 @@ var Kinect = (function () {
                     }
                     return;
                 }
-                
+
                 var xhr = new XMLHttpRequest();
                 xhr.open(method, uri, asyncRequests);
                 xhr.onload = function (e) {
@@ -315,7 +315,7 @@ var Kinect = (function () {
                 }
                 xhr.send(requestData);
             }
-            
+
             // Respond to changes in the connection enabled status
             //    onConnectionEnabledChanged( )
             function onConnectionEnabledChanged() {
@@ -325,7 +325,7 @@ var Kinect = (function () {
                     streamSocketManager.stop();
                 }
             }
-            
+
             // Respond to changes in the number of registered event handlers
             //    onEventHandlersChanged( )
             function onEventHandlersChanged() {
@@ -335,7 +335,7 @@ var Kinect = (function () {
                     eventSocketManager.stop();
                 }
             }
-            
+
             // Respond to changes in the registered hit test handler
             //    onHitTestHandlerChanged( )
             function onHitTestHandlerChanged() {
@@ -345,7 +345,7 @@ var Kinect = (function () {
                     hitTestSocketManager.stop();
                 }
             }
-            
+
             //////////////////////////////////////////////////////////////
             // Public KinectSensor properties
             this.isConnected = false;
@@ -416,12 +416,12 @@ var Kinect = (function () {
             //    .disconnect()
             this.disconnect = function () {
                 isConnectionEnabled = false;
-                
+
                 onConnectionEnabledChanged();
                 onEventHandlersChanged();
                 onHitTestHandlerChanged();
             };
-            
+
             // Add a new stream frame handler.
             //     .addStreamFrameHandler( handler(streamFrame) )] )
             //
@@ -431,10 +431,10 @@ var Kinect = (function () {
                 if (typeof(handler) != "function") {
                     throw new Error("first parameter must be specified and must be a function");
                 }
-                
+
                 streamFrameHandlers.push(handler);
             };
-            
+
             // Removes one (or all) stream frame handler(s).
             //     .removeStreamFrameHandler( [handler(streamFrame)] )] )
             //
@@ -451,12 +451,12 @@ var Kinect = (function () {
                             streamFrameHandlers.slice(index, index + 1);
                         }
                         break;
-                        
+
                     default:
                         throw new Error("first parameter must either be a function or left unspecified");
                 }
             };
-            
+
             // Add a new event handler.
             //     .addEventHandler( handler(event) )] )
             //
@@ -491,14 +491,14 @@ var Kinect = (function () {
                     default:
                         throw new Error("first parameter must either be a function or left unspecified");
                 }
-                
+
                 onEventHandlersChanged();
             };
-            
+
             // Set hit test handler.
             //     .setHitTestHandler( [handler(skeletonTrackingId, handType, x, y)] )] )
             //
-            // handler: Callback function to be executed when interaction stream needs 
+            // handler: Callback function to be executed when interaction stream needs
             //          interaction information in order to adjust a hand pointer position
             //          relative to UI.
             //          If omitted, hit test handler is removed.
@@ -529,27 +529,27 @@ var Kinect = (function () {
 
         //////////////////////////////////////////////////////////////
         // Public KinectConnector properties
-        
+
         // Server connection defaults
         this.DEFAULT_HOST_URI = DEFAULT_HOST_URI;
         this.DEFAULT_HOST_PORT = DEFAULT_HOST_PORT;
         this.DEFAULT_BASE_PATH = DEFAULT_BASE_PATH;
         this.DEFAULT_SENSOR_NAME = DEFAULT_SENSOR_NAME;
-        
+
         // Supported stream names
         this.INTERACTION_STREAM_NAME = "interaction";
         this.USERVIEWER_STREAM_NAME = "userviewer";
         this.BACKGROUNDREMOVAL_STREAM_NAME = "backgroundRemoval";
         this.SKELETON_STREAM_NAME = "skeleton";
         this.SENSORSTATUS_STREAM_NAME = "sensorStatus";
-        
+
         // Supported event categories and associated event types
         this.USERSTATE_EVENT_CATEGORY = "userState";
         this.PRIMARYUSERCHANGED_EVENT_TYPE = "primaryUserChanged";
         this.USERSTATESCHANGED_EVENT_TYPE = "userStatesChanged";
         this.SENSORSTATUS_EVENT_CATEGORY = "sensorStatus";
         this.SENSORSTATUSCHANGED_EVENT_TYPE = "statusChanged";
-        
+
         //////////////////////////////////////////////////////////////
         // Public KinectConnector methods
 
@@ -576,14 +576,14 @@ var Kinect = (function () {
         //     .disconnect()
         this.disconnect = function () {
             // stop all sensors currently tracked
-            
+
             for (var sensorKey in sensorMap) {
                 var sensor = sensorMap[sensorKey];
                 sensor.disconnect();
             }
 
             sensorMap = {};
-            
+
             // Indicate we're now disconnected
             connectionUri = null;
             explicitDisconnect = true;
@@ -611,7 +611,7 @@ var Kinect = (function () {
                 case "undefined":
                 case "string":
                     break;
-                        
+
                 default:
                     throw new Error("first parameter must be a string or left unspecified");
             }
@@ -631,7 +631,7 @@ var Kinect = (function () {
             if (explicitDisconnect) {
                 return null;
             }
-            
+
             if (connectionUri == null) {
                 // If we're not connected yet, connect with default parameters
                 // when someone asks for a sensor.
@@ -657,7 +657,7 @@ var Kinect = (function () {
         // -------------------------------------------------------------------------------------
         // Specify whether server requests to REST endpoints should be asynchronous
         //     .async( asyncRequests )
-        // 
+        //
         // isAsync: true if server requests to REST endpoints should be asynchronous
         //          false if server requests to REST endpoints should be synchronous
         this.async = function(isAsync) {
@@ -678,11 +678,11 @@ var Kinect = (function () {
 // Create the global Kinect UI factory object
 var KinectUI = (function () {
     "use strict";
-    
+
     //////////////////////////////////////////////////////////////
     // KinectUIAdapter object constructor
     function KinectUIAdapter() {
-        
+
         //////////////////////////////////////////////////////////////
         // HandPointer object constructor
         function HandPointer(trackingId, playerIndex, handType) {
@@ -712,7 +712,7 @@ var KinectUI = (function () {
 
             //////////////////////////////////////////////////////////////
             // Public HandPointer methods
-            
+
             // Get all DOM elements that this hand pointer has entered.
             //     .getEnteredElements()
             this.getEnteredElements = function () {
@@ -742,7 +742,7 @@ var KinectUI = (function () {
 
                 return false;
             };
-            
+
             // Create a capture association between this hand pointer and the specified DOM
             // element. This means that event handlers associated with element will receive
             // events triggered by this hand pointer even if hand pointer is not directly
@@ -755,14 +755,14 @@ var KinectUI = (function () {
             this.capture = function (element) {
                 return captureHandPointer(this, element);
             };
-            
+
             // Determine whether this hand pointer corresponds to the primary hand of the
             // primary user.
             //     .getIsPrimaryHandOfPrimaryUser()
             this.getIsPrimaryHandOfPrimaryUser = function () {
                 return this.isPrimaryUser && this.isPrimaryHandOfUser;
             };
-            
+
             // Update this hand pointer's properties from the specified hand pointer received
             // from the interaction stream.
             //     .update( streamHandPointer )
@@ -770,9 +770,9 @@ var KinectUI = (function () {
                 // save the stream hand pointer in case it has additional properties
                 // that clients might be interested in
                 this.originalHandPointer = streamHandPointer;
-                
+
                 this.updated = true;
-                
+
                 this.timestampOfLastUpdate = streamHandPointer.timestampOfLastUpdate;
                 this.handEventType = streamHandPointer.handEventType;
 
@@ -806,7 +806,7 @@ var KinectUI = (function () {
                 };
             };
         }
-        
+
         //////////////////////////////////////////////////////////////
         // ImageWorkerManager object constructor
         //     new ImageWorkerManager()
@@ -816,7 +816,7 @@ var KinectUI = (function () {
         // stream frames to get them ready to be displayed in a canvas
         // element.
         function ImageWorkerManager() {
-            
+
             //////////////////////////////////////////////////////////////
             // ImageMetadata object constructor
             function ImageMetadata(imageCanvas) {
@@ -830,20 +830,20 @@ var KinectUI = (function () {
             // Private ImageWorkerManager properties
             var workerThread = null;
             var imageMetadataMap = {};
-            
+
             //////////////////////////////////////////////////////////////
             // Private ImageWorkerManager methods
             function ensureInitialized() {
                 // Lazy-initialize web worker thread
                 if (workerThread == null) {
-                    workerThread = new Worker(scriptRootURIPath + "kinectWorker-1.8.0.js");
+                    workerThread = new Worker(scriptRootURIPath + "<%= asset_path("kinectWorker-1.8.0")%>");
                     workerThread.addEventListener("message", function (event) {
                         var imageName = event.data.imageName;
                         if (!imageMetadataMap.hasOwnProperty(imageName)) {
                             return;
                         }
                         var metadata = imageMetadataMap[imageName];
-                        
+
                         switch (event.data.message) {
                             case "imageReady":
                                 // Put ready image data in associated canvas
@@ -851,7 +851,7 @@ var KinectUI = (function () {
                                 canvasContext.putImageData(event.data.imageData, 0, 0);
                                 metadata.isProcessing = false;
                                 break;
-                                
+
                             case "notProcessed":
                                 metadata.isProcessing = false;
                                 break;
@@ -862,7 +862,7 @@ var KinectUI = (function () {
 
             //////////////////////////////////////////////////////////////
             // Public ImageWorkerManager methods
-            
+
             // Send named image data to be processed by worker thread
             //     .processImageData(imageName, imageBuffer, width, height)
             //
@@ -872,26 +872,26 @@ var KinectUI = (function () {
             // height: height of image corresponding to imageBuffer data
             this.processImageData = function (imageName, imageBuffer, width, height) {
                 ensureInitialized();
-                
+
                 if (!imageMetadataMap.hasOwnProperty(imageName)) {
                     // We're not tracking this image, so no work to do
                     return;
                 }
                 var metadata = imageMetadataMap[imageName];
-                
+
                 if (metadata.isProcessing || (width <= 0) || (height <= 0)) {
                     // Don't send more data to worker thread when we are in the middle
                     // of processing data already.
                     // Also, Only do work if image data to process is of the expected size
                     return;
                 }
-                
+
                 metadata.isProcessing = true;
 
                 if ((width != metadata.width) || (height != metadata.height)) {
                     // Whenever the image width or height changes, update image tracking metadata
                     // and canvas ImageData associated with worker thread
-                    
+
                     var canvasContext = metadata.canvas.getContext("2d");
                     var imageData = canvasContext.createImageData(width, height);
                     metadata.width = width;
@@ -901,7 +901,7 @@ var KinectUI = (function () {
 
                     workerThread.postMessage({ "message": "setImageData", "imageName": imageName, "imageData": imageData });
                 }
-                
+
                 workerThread.postMessage({ "message": "processImageData", "imageName": imageName, "imageBuffer": imageBuffer });
             };
 
@@ -924,12 +924,12 @@ var KinectUI = (function () {
                 }
             };
         }
-        
+
         //////////////////////////////////////////////////////////////
         // Private KinectUIAdapter constants
         var LAZYRELEASE_RADIUS = 0.3;
         var LAZYRELEASE_YCUTOFF = LAZYRELEASE_RADIUS / 3;
-        
+
         //////////////////////////////////////////////////////////////
         // Private KinectUIAdapter properties
         var uiAdapter = this;
@@ -998,11 +998,11 @@ var KinectUI = (function () {
             if (!handPointerEventsEnabled) {
                 return;
             }
-            
+
             var event = createInteractionEvent(eventName, { "handPointer": handPointer });
             element.dispatchEvent(event);
         }
-        
+
         function raiseGlobalUIEvent(eventName, eventData) {
             if (!handPointerEventsEnabled || !eventHandlers.hasOwnProperty(eventName)) {
                 // Events are disabled, or there are no event handlers registered for event.
@@ -1014,7 +1014,7 @@ var KinectUI = (function () {
                 handlerArray[i](eventData);
             }
         }
-        
+
         function switchCapture(handPointer, oldElement, newElement) {
             handPointer.captured = newElement;
 
@@ -1131,7 +1131,7 @@ var KinectUI = (function () {
                 }
             }
         }
-        
+
         function beginInteractionFrame() {
             if (isInInteractionFrame) {
                 console.log("Call to beginInteractionFrame was made without corresponding call to endInteractionFrame");
@@ -1309,7 +1309,7 @@ var KinectUI = (function () {
                 delete internalHandPointerData[handPointerKey];
             }
         }
-        
+
         function updatePublicHandPointers() {
             var iHandPointer = 0;
 
@@ -1332,7 +1332,7 @@ var KinectUI = (function () {
 
             raiseGlobalUIEvent(uiController.HANDPOINTERS_UPDATED, uiAdapter.handPointers);
         }
-        
+
         function hitTest(x, y) {
             // Ensure excluded elements are hidden before performing hit test
             var displayProp = "display";
@@ -1352,7 +1352,7 @@ var KinectUI = (function () {
 
             return hitElement;
         }
-        
+
         function getElementId(element) {
             // First check if we've already set the kinect element ID.
             var id = jQuery.data(element, kinectIdPrefix);
@@ -1362,17 +1362,17 @@ var KinectUI = (function () {
 
             // If not, fall back to regular element id, if present
             id = element.id;
-            
+
             if (id.trim() == "") {
                 // If there is no id on element, assign one ourselves
                 id = kinectIdPrefix + (++lastAssignedControlId);
             }
-            
+
             // Remember assigned id
             jQuery.data(element, kinectIdPrefix, id);
             return id;
         }
-        
+
         function setCapture(element) {
             // Not all browsers support mouse capture functionality
             if (typeof element.setCapture == "function") {
@@ -1446,14 +1446,14 @@ var KinectUI = (function () {
                             // Trigger click on press release if release point is close enough
                             // to around the top half of button, or if it's anywhere below
                             // button. I.e.: accept a "lazy-press" as a real press.
-                            
+
                             var box = captured.getBoundingClientRect();
                             var insideButton = false;
                             if ((box.left <= handPointer.x) && (handPointer.x <= box.right) &&
                                 (box.top <= handPointer.y) && (handPointer.y <= box.bottom)) {
                                 insideButton = true;
                             }
-                            
+
                             // Map hand pointer to a coordinate space around center of button
                             // and convert to be relative to window size.
                             var relativePoint = windowToInteractionZone({
@@ -1465,11 +1465,11 @@ var KinectUI = (function () {
                                 isWithinLazyReleaseArea =
                                     Math.sqrt((relativePoint.x * relativePoint.x) + (relativePoint.y * relativePoint.y)) < LAZYRELEASE_RADIUS;
                             }
-                            
+
                             if (insideButton || isWithinLazyReleaseArea) {
                                 $(element).click();
                             }
-                            
+
                             event.stopPropagation();
                         }
                     }
@@ -1518,7 +1518,7 @@ var KinectUI = (function () {
                         pressedElement = event.target;
                         if (setCapture(event.target)) {
                             isMouseCaptured = true;
-                            
+
                             // Different browsers have slightly different behaviors related to which element
                             // will be considered the event target, and how mouseenter and mouseleave events
                             // are sent in case of capture, so cover all bases.
@@ -1553,7 +1553,7 @@ var KinectUI = (function () {
                             // animations for Kinect button hover and press.
                             fakeClick = true;
                         }
-                        
+
                         pressedElement = null;
                         if (isMouseCaptured) {
                             releaseButtonCapture(event);
@@ -1562,7 +1562,7 @@ var KinectUI = (function () {
                         if (!isMouseOver) {
                             $(element).removeClass(uiController.BUTTON_HOVER_CLASS);
                         }
-                        
+
                         if (fakeClick) {
                             $(element).click();
                         }
@@ -1572,11 +1572,11 @@ var KinectUI = (function () {
                 }
             });
         }
-        
+
         //////////////////////////////////////////////////////////////
         // Public KinectUIAdapter properties
         this.handPointers = [];
-        
+
         //////////////////////////////////////////////////////////////
         // Public KinectUIAdapter methods
 
@@ -1591,7 +1591,7 @@ var KinectUI = (function () {
             if (typeof streamFrame != "object") {
                 throw new Error("Frame must be an object");
             }
-            
+
             if (streamFrame == null) {
                 // Ignore null frames
                 return;
@@ -1610,7 +1610,7 @@ var KinectUI = (function () {
 
                     updatePublicHandPointers();
                     break;
-                    
+
                 default:
                     if (bindableStreamNames[streamName]) {
                         // If this is one of the bindable stream names
@@ -1619,7 +1619,7 @@ var KinectUI = (function () {
                     break;
             }
         };
-        
+
         // Resets the hand pointer array to its initial state (zero hand pointers tracked).
         //     .clearHandPointers()
         this.clearHandPointers = function () {
@@ -1636,7 +1636,7 @@ var KinectUI = (function () {
                 isClearRequestPending = true;
             }
         };
-        
+
         // Function called back when a sensor's interaction stream needs interaction
         // information in order to adjust a hand pointer position relative to UI.
         //     .hitTestHandler(trackingId, handType, xPos, yPos)
@@ -1701,10 +1701,10 @@ var KinectUI = (function () {
                     }
                 }
             }
-            
+
             return interactionInfo;
         };
-        
+
         // Adds an element that should be excluded from hit testing (both for press adjustment
         // and for UI message routing).
         //     .addHitTestExclusion( element )
@@ -1715,7 +1715,7 @@ var KinectUI = (function () {
                 console.log('Tried to add a hit test exclusion for a null element.');
                 return;
             }
-            
+
             excludedElements.push(element);
         };
 
@@ -1729,7 +1729,7 @@ var KinectUI = (function () {
                 console.log('Tried to remove a hit test exclusion for a null element.');
                 return;
             }
-            
+
             var index = excludedElements.indexOf(element);
             if (index >= 0) {
                 excludedElements.splice(index, 1);
@@ -1768,7 +1768,7 @@ var KinectUI = (function () {
         this.unbindStreamFromCanvas = function(streamName) {
             imageWorkerManager.setImageData(streamName, null);
         };
-        
+
         // Attach a new handler for a specified global UI event.
         //     .on( eventName, handler(eventData) )] )
         //
@@ -1791,7 +1791,7 @@ var KinectUI = (function () {
                 handlerArray = [];
                 eventHandlers[eventName] = handlerArray;
             }
-            
+
             handlerArray.push(handler);
         };
 
@@ -1817,7 +1817,7 @@ var KinectUI = (function () {
                 default:
                     throw new Error("second parameter must either be a function or left unspecified");
             }
-            
+
             if (!eventHandlers.hasOwnProperty(eventName)) {
                 // If there are no event handlers associated with event, just return
                 return;
@@ -1832,7 +1832,7 @@ var KinectUI = (function () {
                 }
             }
         };
-        
+
         // Configures the specified DOM element array to act as a Kinect UI button
         //     .promoteButtons([elements])
         //
@@ -1852,12 +1852,12 @@ var KinectUI = (function () {
                         // If null, treat as if an empty array was specified
                         return;
                     }
-                    
+
                     if (!("length" in elements)) {
                         throw error;
                     }
                     break;
-                    
+
                 default:
                     throw error;
             }
@@ -1885,7 +1885,7 @@ var KinectUI = (function () {
             if (cursorElement != null) {
                 return jQuery.data(cursorElement, uiController.CURSOR_ID);
             }
-            
+
             var showCursor = true;
             cursorElement = document.createElement("div");
             cursorElement.id = uiController.CURSOR_ID;
@@ -1944,7 +1944,7 @@ var KinectUI = (function () {
                 }
             };
             jQuery.data(cursorElement, uiController.CURSOR_ID, cursorData);
-            
+
             var wasHovering = false;
             var wasPressing = false;
             uiAdapter.addHitTestExclusion(cursorElement);
@@ -2178,10 +2178,10 @@ var KinectUI = (function () {
         this.BUTTON_PRESSED_CLASS = "button-pressed";
         this.CURSOR_ID = "kinect-cursor";
     };
-    
+
     //////////////////////////////////////////////////////////////
     // Private global properties common to all KinectUI objects
-    
+
     // Get the path common to all script files
     var scriptRootURIPath = (function () {
         var rootPath = "";
@@ -2202,13 +2202,13 @@ var KinectUI = (function () {
 
     // The global Kinect UI controller object is a singleton instance of our internal KinectUIController type
     var uiController = new KinectUIController();
-    
+
     // Prefix for element IDs assigned by Kinect UI layer for purposes of hit test detection
     var kinectIdPrefix = "kinectId";
 
     // Id in sequence to assign to controls that don't already have an assigned DOM element id
     var lastAssignedControlId = 0;
-    
+
     // return singleton
     return uiController;
 })();
