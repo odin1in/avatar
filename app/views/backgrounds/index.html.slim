@@ -1,0 +1,31 @@
+.page-header
+  = link_to new_background_path, :class => 'btn btn-primary' do 
+    span.glyphicon.glyphicon-plus
+    |  New Background
+  h1
+    | Listing backgrounds
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th
+          | Title
+        th
+          | Status
+        th
+        th
+        th
+    tbody
+      - @backgrounds.each do | background |
+        tr
+          td
+            = background.title
+          td
+            = background.status
+          td
+            = link_to 'Show', background
+          td
+            = link_to 'Edit', edit_background_path(background) 
+          td
+            = link_to 'Destroy', background, method: :delete, data: { confirm: 'Are you sure?' } 

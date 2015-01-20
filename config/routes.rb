@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    resources :backgrounds
+  end
+
+  resources :backgrounds
+
+  # resources :backgrounds
 
   resources :images
 
@@ -16,7 +23,9 @@ Rails.application.routes.draw do
   get 'welcome/index2'
 
   namespace :admin do
+    get '/', to: 'welcome#index'
     resources :users
+    resources :backgrounds
   end
 
   # Example of regular route:

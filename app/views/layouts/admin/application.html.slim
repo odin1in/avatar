@@ -15,7 +15,7 @@ html
 
     /! 載入html與canvas轉換函式庫
     = csrf_meta_tags
-  body class="#{controller_name} #{action_name}"
+  body class="#{controller_path} #{action_name}"
 
     .navbar.navbar-inverse.navbar-fixed-top
       .container
@@ -26,20 +26,22 @@ html
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          = link_to "Avatar", "#", :class => "navbar-brand"
+          = link_to "BallyHoo", admin_path, :class => "navbar-brand"
         .collapse.navbar-collapse
           ul.nav.navbar-nav
-            li.active
+            li
               a href="#"
-                | Home
+                | 範例
             li
               a href="#about"
-                | About
+                | 活動辦法
             li
-              a href="#contact"
-                | Contact
+              a href=admin_backgrounds_path
+                | 背景圖
           ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
+              li
+                = link_to "Setting", "#"
               li
                 = link_to "Sign Out", destroy_user_session_path, method: :delete
             - else
