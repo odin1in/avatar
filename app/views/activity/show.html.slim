@@ -1,0 +1,104 @@
+
+
+
+/! 介面容器，含有所有操作按鈕與去背後的人物影像，以及背景影像
+#uiContainer
+  /! 背景容器
+  #backgroundContainer
+    = image_tag("front/CYCU1.jpg", id: "backgroundImg")
+    / img#backgroundImg src="img\\CYCU1.jpg" /
+    canvas#userViewerCanvas.streamImageCanvas
+    canvas#backgroundRemovalCanvas.streamImageCanvas
+  /! 控制按鈕容器
+  .commandButtonContainer
+    .button
+      .commandButton.kinect-button.showModel
+      .text
+        span style="position:absolute; top: 15px;"
+          = image_tag("front/info.png", width: 100)
+        .commandButtonContent
+    .button
+      #printScreenButton.commandButton.kinect-button
+      .text
+        span style="position:absolute; top: 15px;"
+          = image_tag("front/camera.png", width: 100)
+        .commandButtonContent
+    / .button
+    /   #togglePanelButton.commandButton.kinect-button
+    /   .text
+    /     span#toggleText
+    /     .commandButtonContent
+
+  /! 圖片按鈕容器
+  / #buttonContainer
+  /   #choosePanel
+  /     .selectButton.kinect-button.prev
+  /       = image_tag("front/Prev.png")
+  /     .imgButton.kinect-button.img1
+  /       = image_tag("front/CYCU1.jpg")
+  /     .imgButton.kinect-button.img2
+  /       = image_tag("front/CYCU2.jpg")
+  /     .imgButton.kinect-button.img3
+  /       = image_tag("front/CYCU3.jpg")
+  /     .imgButton.kinect-button.img4
+  /       = image_tag("front/CYCU4.jpg")
+  /     .imgButton.kinect-button.img5
+  /       = image_tag("front/CYCU5.jpg")
+  /     .selectButton.kinect-button.next
+  /       = image_tag("front/Next.png")
+/! 讀取圖示動畫區塊
+#loadImg
+  = image_tag("front/Load.gif")
+/! 遮色片區塊
+#opaqueTable
+/! 計時器區塊
+#counter
+/! 結果圖片
+#result_container style="height: 100%; background-image: url(#{asset_path('front/result_back.jpg')});background-position: center center;"
+  img#resultImg/
+/! qrcode容器
+#qrcodeContainer
+/! 重新開始按鈕容器
+.restoreButtonContainerFromPage
+  #restoreButtonFrompage.kinect-button
+  .text
+    span
+      = image_tag("front/facebook.png", style: 100)
+    .commandButtonContent
+.restoreButtonContainer
+  #restoreButton.kinect-button
+  .text
+    span
+      = image_tag("front/home.png", style: 100)
+    .commandButtonContent
+a.left.random_image href="#" style="position: fixed; left: 50px; top: 30%;font-size: 30px;color: white;"
+  span.glyphicon.glyphicon-chevron-left
+a.right.random_image href="#" style="position: fixed; right: 50px; top: 30%;font-size: 30px;color: white;"
+  span.glyphicon.glyphicon-chevron-right
+/ <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+/   <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+
+/ </a>
+#myModalIntroduce.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close aria-label="Close" data-dismiss="modal" type="button"
+          span aria-hidden="true"  &times;
+        h4.modal-title 活動辨法
+      .modal-body
+        = simple_format @user.introduce
+      .modal-footer
+        button.btn.btn-default data-dismiss="modal" type="button"  Close
+        button.show-examples.btn.btn-primary type="button" Examples
+#myModalSample.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close aria-label="Close" data-dismiss="modal" type="button"
+          span aria-hidden="true"  &times;
+        h4.modal-title 範例
+      .modal-body
+        = simple_format @user.sample
+      .modal-footer
+        button.btn.btn-default data-dismiss="modal" type="button"  Close

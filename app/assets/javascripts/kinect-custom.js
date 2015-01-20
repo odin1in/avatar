@@ -281,12 +281,12 @@ $(function() {
                                   },
                                   success: function(response) {
                                       var remoteDataURL = "http://54.65.237.102/index.php?img=" + response;
-                                      console.log(remoteDataURL)
-                                      $("#qrcodeContainer").qrcode({
-                                          "render": "image",
-                                          "background": "white",
-                                          "text": remoteDataURL
-                                      });
+                                      // console.log(remoteDataURL)
+                                      // $("#qrcodeContainer").qrcode({
+                                      //     "render": "image",
+                                      //     "background": "white",
+                                      //     "text": remoteDataURL
+                                      // });
                                       $("#opaqueTable").fadeOut(1000);
                                       $("#uiContainer").fadeOut(1000, function() {
                                           $("#resultImg").fadeIn(800);
@@ -310,7 +310,7 @@ $(function() {
                               //介面容器淡出
                               $("#uiContainer").fadeOut(1000, function() {
                                   //結果圖片淡入
-                                  $("#resultImg").fadeIn(800);
+                                  $("#result_container").fadeIn(800);
                                   //重新開始容器淡入
                                   $(".restoreButtonContainer").fadeIn(800);
                                   $(".restoreButtonContainerFromPage").fadeIn(800);

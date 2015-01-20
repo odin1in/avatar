@@ -836,7 +836,7 @@ var KinectUI = (function () {
             function ensureInitialized() {
                 // Lazy-initialize web worker thread
                 if (workerThread == null) {
-                    workerThread = new Worker(scriptRootURIPath + "<%= asset_path("kinectWorker-1.8.0")%>");
+                    workerThread = new Worker(scriptRootURIPath + "<%= asset_path("kinectWorker-1.8.0").gsub('/assets','')%>");
                     workerThread.addEventListener("message", function (event) {
                         var imageName = event.data.imageName;
                         if (!imageMetadataMap.hasOwnProperty(imageName)) {

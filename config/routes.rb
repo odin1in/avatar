@@ -1,14 +1,10 @@
 Rails.application.routes.draw do
 
+
+
   mount Ckeditor::Engine => '/ckeditor'
-  namespace :admin do
-  end
 
-  namespace :admin do
-
-  end
-
-  resources :images
+  # resources :images
 
   # devise_for :users
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
@@ -21,11 +17,13 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
   get 'welcome/index2'
-
+  resources :activity, only: [:show]
   namespace :admin do
     get '/', to: 'welcome#index'
     get 'introduce/edit'
     patch 'introduce/update'
+    patch 'sample/update'
+    get 'sample/edit'
     resources :backgrounds
   end
 

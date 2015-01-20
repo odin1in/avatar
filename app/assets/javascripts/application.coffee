@@ -12,6 +12,7 @@
 #
 #= require jquery
 #= require jquery_ujs
+#= require jquery.readyloader
 #= require turbolinks
 #= require html2canvas
 #= require kinect
@@ -19,5 +20,6 @@
 #= require jquery.qrcode-0.11.0.min
 #= require ckeditor/init
 #= require welcome
+#= require activity
 #= require bootstrap
 #= require kinect-custom
