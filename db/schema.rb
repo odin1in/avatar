@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150120171306) do
+ActiveRecord::Schema.define(version: 20150121015330) do
 
   create_table "admin_backgrounds", force: :cascade do |t|
     t.string   "title"
@@ -36,6 +36,22 @@ ActiveRecord::Schema.define(version: 20150120171306) do
 
   add_index "backgrounds", ["status"], name: "index_backgrounds_on_status"
   add_index "backgrounds", ["user_id"], name: "index_backgrounds_on_user_id"
+
+  create_table "ckeditor_assets", force: :cascade do |t|
+    t.string   "data_file_name",               null: false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    limit: 30
+    t.string   "type",              limit: 30
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable"
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type"
 
   create_table "images", force: :cascade do |t|
     t.datetime "created_at",         null: false
@@ -74,6 +90,8 @@ ActiveRecord::Schema.define(version: 20150120171306) do
     t.string   "uid"
     t.string   "name"
     t.string   "image"
+    t.text     "sample"
+    t.text     "introduce"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

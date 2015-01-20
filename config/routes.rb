@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
+  mount Ckeditor::Engine => '/ckeditor'
   namespace :admin do
-    resources :backgrounds
   end
 
-  resources :backgrounds
+  namespace :admin do
 
-  # resources :backgrounds
+  end
 
   resources :images
 
@@ -24,7 +24,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get '/', to: 'welcome#index'
-    resources :users
+    get 'introduce/edit'
+    patch 'introduce/update'
     resources :backgrounds
   end
 

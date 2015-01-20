@@ -17,6 +17,7 @@
 #= require kinect
 #= require kinectWorker-1.8.0
 #= require jquery.qrcode-0.11.0.min
+#= require ckeditor/init
 #= require welcome
 #= require bootstrap
 #= require kinect-custom
