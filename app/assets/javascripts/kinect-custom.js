@@ -251,6 +251,7 @@ $(function() {
                       onrendered: function(canvas) {
                           //canvas轉換為jpeg資料
                           var dataURL = canvas.toDataURL("image/jpeg");
+                          console.log(dataURL)
                           //設定結果圖片為jpeg資料來源
                           $("#resultImg").attr("src", dataURL);
                           //設定背景容器為jpeg資料來源
@@ -259,17 +260,28 @@ $(function() {
                           $("#opaqueTable").animate({opacity:'0.2'}, 300, function() {
                               //讀取圖示動畫淡入
                               $("#loadImg").fadeIn();
-
+                              // $.ajax({
+                              //   type: "post",
+                              //   url: '/images',
+                              //   dataType: "json",
+                              //   data: {
+                              //     image_json: dataURL
+                              //   },
+                              //   success: function(response){
+                              //     console.log(response)
+                              //   }
+                              // })
                               //Ajax函式開始，虛擬機佈署好Server端檔案後填入網址即可取消註解
-                              /*$.ajax({
+                              $.ajax({
                                   type: "POST",
-                                  url: "http://請填入虛擬機網址/get.php",
+                                  url: "http://avatar.pwn.so/get.php",
                                   dataType: 'html',
                                   data: {
                                       img: dataURL
                                   },
                                   success: function(response) {
-                                      var remoteDataURL = "http://請填入虛擬機網址/index.php?img=" + response;
+                                      var remoteDataURL = "http://avatar.pwn.so/index.php?img=" + response;
+                                      console.log(remoteDataURL)
                                       $("#qrcodeContainer").qrcode({
                                           "render": "image",
                                           "background": "white",
@@ -279,19 +291,20 @@ $(function() {
                                       $("#uiContainer").fadeOut(1000, function() {
                                           $("#resultImg").fadeIn(800);
                                           $(".restoreButtonContainer").fadeIn(800);
+                                          $(".restoreButtonContainerFromPage").fadeIn(800);
                                           $("#qrcodeContainer").fadeIn(800);
                                           $("#loadImg").fadeOut();
                                       });
                                   }
-                              });Ajax函式結束*/
+                              });
                               //預覽函式開始，Ajax函式取消註解後可移除此段
 
                               //qrcode容器初始化內容
-                              $("#qrcodeContainer").qrcode({
-                                  "render": "image",
-                                  "background": "white",
-                                  "text": "預覽函式"
-                              });
+                              // $("#qrcodeContainer").qrcode({
+                              //     "render": "image",
+                              //     "background": "white",
+                              //     "text": "預覽函式"
+                              // });
                               //遮色片淡出
                               $("#opaqueTable").fadeOut(1000);
                               //介面容器淡出
@@ -300,6 +313,7 @@ $(function() {
                                   $("#resultImg").fadeIn(800);
                                   //重新開始容器淡入
                                   $(".restoreButtonContainer").fadeIn(800);
+                                  $(".restoreButtonContainerFromPage").fadeIn(800);
                                   //qrcode容器淡入
                                   $("#qrcodeContainer").fadeIn(800);
                                   //讀取圖示動畫淡出
@@ -316,6 +330,10 @@ $(function() {
   //重新開始按鈕點擊 - jquery函式
   $("#restoreButton").click(function() {
       location.reload();
+  });
+
+  $("#restoreButtonFrompage").click(function() {
+      location.href="https://www.facebook.com/pages/%E5%A4%A7%E9%A0%AD%E8%B2%BC%E6%94%B6%E9%9B%86%E6%A9%9F/1553535211560180";
   });
   //上一圖片群組按鈕點擊 - jquery函式
   $(".prev").click(function() {

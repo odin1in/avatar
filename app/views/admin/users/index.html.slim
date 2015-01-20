@@ -1,0 +1,35 @@
+.page-header
+  = link_to new_admin_user_path, :class => 'btn btn-primary' do 
+    span.glyphicon.glyphicon-plus
+    |  New User
+  h1
+    | Listing admin_users
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th
+          | Sticker
+        th
+          | Background
+        th
+          | Status
+        th
+        th
+        th
+    tbody
+      - @admin_users.each do | admin_user |
+        tr
+          td
+            = admin_user.sticker
+          td
+            = admin_user.background
+          td
+            = admin_user.status
+          td
+            = link_to 'Show', admin_user
+          td
+            = link_to 'Edit', edit_admin_user_path(admin_user) 
+          td
+            = link_to 'Destroy', admin_user, method: :delete, data: { confirm: 'Are you sure?' } 

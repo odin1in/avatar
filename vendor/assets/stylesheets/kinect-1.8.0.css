@@ -152,13 +152,24 @@ body {
     margin-left: -50px;
 }
 
-.restoreButtonContainer {
+.restoreButtonContainer{
     z-index: 0;
     position: absolute;
     width: 200px;
     height: 200px;
     left: 0;
     bottom: 0;
+    margin: 20px;
+    display: none;;
+}
+
+.restoreButtonContainerFromPage {
+    z-index: 0;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    left: 0;
+    bottom: 200px;
     margin: 20px;
     display: none;;
 }
@@ -392,7 +403,7 @@ body {
         margin-top: -25px;
     }
 
-    .restoreButtonContainer, #qrcodeContainer {
+    .restoreButtonContainer, #qrcodeContainer, .restoreButtonContainerFromPage {
         width: 150px;
         height: 150px;
         margin: 10px;

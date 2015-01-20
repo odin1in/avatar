@@ -3,7 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ ->
   $('.carousel').carousel()
-  $("h1").addClass("rubberBand animated")
 
 $(document).on "click", ".showModel", ->
     $('#myModal').modal()
