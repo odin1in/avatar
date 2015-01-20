@@ -2,13 +2,13 @@ class ActivityController < ApplicationController
   before_action :set_user
 
   def show
-    gon.backgrounds = ["CYCU1.jpg",
-                       "CYCU2.jpg",
-                       "CYCU3.JPG",
-                       "CYCU4.JPG",
-                       "CYCU5.JPG",
-                       "CYCU6.JPG",
-                       "CYCU7.JPG"]
+    gon.backgrounds = ["/background/CYCU1.jpg",
+                       "/background/CYCU2.jpg",
+                       "/background/CYCU3.JPG",
+                       "/background/CYCU4.JPG",
+                       "/background/CYCU5.JPG",
+                       "/background/CYCU6.JPG",
+                       "/background/CYCU7.JPG"]
   end
 
   private
