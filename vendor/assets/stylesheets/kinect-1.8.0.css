@@ -1,0 +1,450 @@
+﻿html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-color: black;
+    overflow: hidden;
+    font-family: 'Segoe UI';
+    user-select: none;
+    -ms-user-select: -moz-none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+}
+
+#uiContainer {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+}
+
+#backgroundContainer {
+    position: absolute;
+    margin: 0 auto;
+    width: 100vw;
+    height: 56.25vw;
+}
+
+#backgroundImg {
+    width: 100%;
+    height: 100%;
+}
+
+.streamImageCanvas {
+    position: absolute;
+    width: 75%;
+    height: 100%;
+    top: 0;
+    left: 12.5%;
+    opacity: 0.0;
+    transition: opacity 1.0s;
+}
+
+.streamImageCanvas.showing {
+    opacity: 1.0;
+    transition: opacity 1.0s;
+}
+
+#buttonContainer {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 222px;
+    bottom: 0;
+}
+
+#choosePanel {
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    top: 100%;
+    transition: top 0.4s;
+}
+
+#choosePanel.showing {
+    top: 0;
+    transition: top 0.4s;
+}
+
+.commandButtonContainer {
+    position: absolute;
+    width: 500px;
+    /*height: 100%;*/
+    right: 0;
+    bottom: 0;
+}
+
+#opaqueTable {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.2;
+    background-color: white;
+    display: none;
+}
+
+#qrcodeContainer {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    right: 0;
+    bottom: 0;
+    margin: 20px;
+    background-color: white;
+    display: none;
+}
+
+#counter {
+    position: absolute;
+    width: 15vw;
+    height: 15vw;
+    top: 50%;
+    left: 50%;
+    margin-top: -7.5vw;
+    margin-left: -7.5vw;
+    text-align: center;
+    font-size: 11vw;
+    font-weight: 600;
+}
+
+#resultImg {
+    position: absolute;
+    width: 1280px;
+    height: 720px;
+    top: 50%;
+    left: 50%;
+    margin-top: -360px;
+    margin-left: -640px;
+    display: none;
+}
+
+#loadImg {
+    position: absolute;
+    width: 15vw;
+    height: 15vw;
+    top: 50%;
+    left: 50%;
+    margin-top: -7.5vw;
+    margin-left: -7.5vw;
+    background-color: white;
+    border: 2px solid white;
+    border-radius: 25px;
+    display: none;
+}
+
+#loadImg img{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+}
+
+.restoreButtonContainer {
+    z-index: 0;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    left: 0;
+    bottom: 0;
+    margin: 20px;
+    display: none;;
+}
+
+#restoreButton {
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    border: 2px solid white;
+    background: rgb(0, 103, 167);
+}
+
+.imgButton {
+    position: absolute;
+    display: block;
+    width: 288px;
+    height: 162px;
+    top: 50%;
+    margin-top: -81px;
+    margin-left: -144px;
+    opacity: 1;
+    transition:         transform 0.16s;
+    -ms-transition:     transform 0.16s;
+    -moz-transition:    transform 0.16s;
+    -webkit-transition: transform 0.16s;
+}
+
+.imgButton img, #qrcodeContainer img{
+    border: 1px solid white;
+    width: 100%;
+    height: 100%;
+}
+
+.commandButton {
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    border: 2px solid white;
+    background: rgba(255, 255, 255, 0.5);
+    transition:         0.16s;
+    -ms-transition:     0.16s;
+    -moz-transition:    0.16s;
+    -webkit-transition: 0.16s;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+}
+
+.button {
+    z-index: 0;
+    position: relative;
+    width: 288px;
+    height: 162px;
+    display: inline-block;
+    margin: 20px;
+}
+
+.text span{
+    z-index: 2;
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    height: 20pt;
+    top: 50%;
+    margin-top: -10pt;
+    text-align: center;
+    font-size: 16pt;
+    font-weight: 600;
+    color: white;
+}
+
+.commandButtonContent {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.selectButton {
+    position: absolute;
+    display: block;
+    width: 100px;
+    height: 222px;
+    top: 50%;
+    margin-top: -111px;
+    transition:         0.16s;
+    -ms-transition:     0.16s;
+    -moz-transition:    0.16s;
+    -webkit-transition: 0.16s;
+}
+
+.selectButton img{
+    position: absolute;
+    top: 50%;
+    margin-top: -50px;
+    width: 100%;
+    height: 100px;
+}
+
+.prev {
+    left: 0.5%;
+}
+
+.img1 {
+    left: 14%;
+}
+
+.img2 {
+    left: 32%;
+}
+
+.img3 {
+    left: 50%;
+}
+
+.img4 {
+    left: 68%;
+}
+
+.img5 {
+    left: 86%;
+}
+
+.next {
+    right: 0.5%;
+}
+
+.button-hover {
+    transform:         scale(1.05);
+    -ms-transform:     scale(1.05);
+    -moz-transform:    scale(1.05);
+    -webkit-transform: scale(1.05);
+}
+
+.button-pressed {
+    transform:         scale(0.95);
+    -ms-transform:     scale(0.95);
+    -moz-transform:    scale(0.95);
+    -webkit-transform: scale(0.95);
+}
+
+#kinect-cursor {
+    position: absolute;
+    display: none;
+    width: 120px;
+    height: 120px;
+}
+
+#kinect-cursor-glow {
+    stroke-opacity: 0.0;
+}
+
+#kinect-cursor-normal {
+    stroke-opacity: 1.0;
+    fill-opacity: 1.0;
+}
+
+#cursor-progress {
+    stroke-opacity: 0.0;
+    fill-opacity: 0.0;
+}
+
+#kinect-cursor-extended {
+    stroke-opacity: 0.0;
+    fill-opacity: 0.0;
+}
+
+.cursor-hover #kinect-cursor-glow {
+    stroke-opacity: 1.0;
+}
+
+.cursor-hover #kinect-cursor-progress {
+    stroke-opacity: 1.0;
+    fill-opacity: 1.0;
+}
+
+.cursor-pressed #kinect-cursor-normal {
+    stroke-opacity: 0.0;
+    fill-opacity: 0.0;
+}
+
+.cursor-pressed #kinect-cursor-progress {
+    stroke-opacity: 0.0;
+    fill-opacity: 0.0;
+}
+
+.cursor-pressed #kinect-cursor-extended {
+    stroke-opacity: 1.0;
+    fill-opacity: 1.0;
+}
+
+@media screen and (max-width: 1599px) {
+    #uiContainer {
+        width: 1200px;
+    }
+
+    #backgroundContainer {
+        width: 1200px;
+        height: 720px;
+    }
+
+    #buttonContainer {
+        height: 170px;
+    }
+
+    .button {
+        width: 120px;
+        height: 68px;
+        margin: 10px;
+    }
+
+    .text span{
+        font-size: 12pt;
+        font-weight: 400;
+    }
+
+    .imgButton {
+        width: 200px;
+        height: 113px;
+        margin-left: -100px;
+        margin-top: -56.5px;
+    }
+
+    .selectButton {
+        width: 50px;
+        height: 170px;
+        margin-top: -85px;
+    }
+
+    .selectButton img{
+        height: 50px;
+        margin-top: -25px;
+    }
+
+    .restoreButtonContainer, #qrcodeContainer {
+        width: 150px;
+        height: 150px;
+        margin: 10px;
+    }
+}
+
+@media screen and (min-width: 1600px) and (max-width: 1920px) {
+    #uiContainer {
+        width: 1600px;
+    }
+
+    #backgroundContainer {
+        width: 1600px;
+        height: 900px;
+    }
+
+    #buttonContainer {
+        height: 204px;
+    }
+
+    .button {
+        width: 200px;
+        height: 113px;
+        margin: 15px;
+    }
+
+    .text span{
+        font-size: 14pt;
+        font-weight: 500;
+    }
+
+    .imgButton {
+        width: 256px;
+        height: 145px;
+        margin-left: -128px;
+        margin-top: -72.5px;
+    }
+
+    .selectButton {
+        width: 80px;
+        height: 204px;
+        margin-top: -102px;
+    }
+
+    .selectButton img{
+        height: 80px;
+        margin-top: -40px;
+    }
+
+    .restoreButtonContainer, #qrcodeContainer {
+        width: 180px;
+        height: 180px;
+        margin: 15px;
+    }
+}
