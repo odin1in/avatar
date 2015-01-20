@@ -274,13 +274,13 @@ $(function() {
                               //Ajax函式開始，虛擬機佈署好Server端檔案後填入網址即可取消註解
                               $.ajax({
                                   type: "POST",
-                                  url: "http://avatar.pwn.so/get.php",
+                                  url: "http://54.65.237.102/get.php",
                                   dataType: 'html',
                                   data: {
                                       img: dataURL
                                   },
                                   success: function(response) {
-                                      var remoteDataURL = "http://avatar.pwn.so/index.php?img=" + response;
+                                      var remoteDataURL = "http://54.65.237.102/index.php?img=" + response;
                                       console.log(remoteDataURL)
                                       $("#qrcodeContainer").qrcode({
                                           "render": "image",
