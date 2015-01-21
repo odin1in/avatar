@@ -43,7 +43,7 @@ html
                   a href=backgrounds_path
                     | 背景圖
                 li
-                  a href=activity_path(current_user)
+                  a href=activity_path(current_user) data-no-turbolink=""
                     | My Activity
             ul.nav.navbar-nav.navbar-right
               - if user_signed_in?
