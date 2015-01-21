@@ -3,7 +3,7 @@ class ActivityController < ApplicationController
 
   def show
     @no_panel = true
-    @backgrounds = current_user.backgrounds.map{|b| b.image.url}
+    @backgrounds = @user.backgrounds.map{|b| b.image.url}
     gon.backgrounds = @backgrounds
   end
 

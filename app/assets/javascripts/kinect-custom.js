@@ -272,6 +272,8 @@ $(".activity.show").ready(function() {
                               //   }
                               // })
                               //Ajax函式開始，虛擬機佈署好Server端檔案後填入網址即可取消註解
+                              $(".random_image_previous").fadeOut(1000);
+                              $(".random_image_next").fadeOut(1000);
                               $.ajax({
                                   type: "POST",
                                   url: "http://54.65.237.102/get.php",
@@ -306,6 +308,8 @@ $(".activity.show").ready(function() {
                               //     "text": "預覽函式"
                               // });
                               //遮色片淡出
+                              $(".random_image_previous").fadeOut(1000);
+                              $(".random_image_next").fadeOut(1000);
                               $("#opaqueTable").fadeOut(1000);
                               //介面容器淡出
                               $("#uiContainer").fadeOut(1000, function() {
