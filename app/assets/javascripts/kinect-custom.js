@@ -1,4 +1,4 @@
-$(function() {
+$(".activity.show").ready(function() {
   //設定串流解析度
   var streamImageWidth = 640;
   var streamImageHeight = 480;
