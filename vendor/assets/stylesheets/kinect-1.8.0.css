@@ -78,8 +78,8 @@ body {
     position: absolute;
     width: 500px;
     /*height: 100%;*/
-    right: 0;
-    bottom: 0;
+    right: 80px;
+    bottom: 70px;
 }
 
 #opaqueTable {
