@@ -251,7 +251,7 @@ $(".activity.show").ready(function() {
                       onrendered: function(canvas) {
                           //canvas轉換為jpeg資料
                           var dataURL = canvas.toDataURL("image/jpeg");
-                          console.log(dataURL)
+                          // console.log(dataURL)
                           //設定結果圖片為jpeg資料來源
                           $("#resultImg").attr("src", dataURL);
                           //設定背景容器為jpeg資料來源
@@ -283,12 +283,11 @@ $(".activity.show").ready(function() {
                                   },
                                   success: function(response) {
                                       var remoteDataURL = "http://54.65.237.102/index.php?img=" + response;
-                                      // console.log(remoteDataURL)
-                                      // $("#qrcodeContainer").qrcode({
-                                      //     "render": "image",
-                                      //     "background": "white",
-                                      //     "text": remoteDataURL
-                                      // });
+                                      $("#qrcodeContainer").qrcode({
+                                          "render": "image",
+                                          "background": "white",
+                                          "text": gon.facebook
+                                      });
                                       $("#opaqueTable").fadeOut(1000);
                                       $("#uiContainer").fadeOut(1000, function() {
                                           $("#resultImg").fadeIn(800);
@@ -299,6 +298,7 @@ $(".activity.show").ready(function() {
                                       });
                                   }
                               });
+                              $('#myModalGoFacebook').modal('show')
                               //預覽函式開始，Ajax函式取消註解後可移除此段
 
                               //qrcode容器初始化內容
@@ -337,7 +337,8 @@ $(".activity.show").ready(function() {
   });
 
   $("#restoreButtonFrompage").click(function() {
-      location.href="https://www.facebook.com/pages/%E5%A4%A7%E9%A0%AD%E8%B2%BC%E6%94%B6%E9%9B%86%E6%A9%9F/1553535211560180";
+      // console.log(gon.facebook);
+      location.href= gon.facebook;
   });
   //上一圖片群組按鈕點擊 - jquery函式
   $(".prev").click(function() {

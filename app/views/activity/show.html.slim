@@ -57,7 +57,7 @@
 #result_container style="height: 100%; background-image: url(#{asset_path('front/result_back.jpg')});background-position: center center; background-size: cover;background-repeat: no-repeat;"
   img#resultImg/
 /! qrcode容器
-/ #qrcodeContainer
+#qrcodeContainer
 / /! 重新開始按鈕容器
 .restoreButtonContainerFromPage
   #restoreButtonFrompage.kinect-button
@@ -100,5 +100,18 @@ a.right.random_image_next href="#" style="position: fixed; right: 150px; top: 30
         h4.modal-title 範例
       .modal-body
         = simple_format @user.sample
+      .modal-footer
+        button.btn.btn-default data-dismiss="modal" type="button"  Close
+#myModalGoFacebook.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close aria-label="Close" data-dismiss="modal" type="button"
+          span aria-hidden="true"  &times;
+        h4.modal-title 請到粉絲團領取照片喔~
+      .modal-body
+        | 您可以透過 下方 QRcode 至我們粉絲團找尋您的照片
+        | 或是
+        | 使用 #55ddfedd 搜尋您的照片~
       .modal-footer
         button.btn.btn-default data-dismiss="modal" type="button"  Close

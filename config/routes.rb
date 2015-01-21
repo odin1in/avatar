@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-
-
   mount Ckeditor::Engine => '/ckeditor'
 
   # resources :images
@@ -21,6 +19,7 @@ Rails.application.routes.draw do
   get 'sample/edit'
   get 'introduce/edit'
   patch 'introduce/update'
+  resource :user, only: [:edit, :update]
   resources :activity, only: [:show]
   resources :backgrounds
   namespace :admin do

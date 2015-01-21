@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121015330) do
+ActiveRecord::Schema.define(version: 20150121131610) do
 
   create_table "admin_backgrounds", force: :cascade do |t|
     t.string   "title"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 20150121015330) do
     t.string   "image"
     t.text     "sample"
     t.text     "introduce"
+    t.string   "facebook"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

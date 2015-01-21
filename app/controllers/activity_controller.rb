@@ -5,6 +5,7 @@ class ActivityController < ApplicationController
     @no_panel = true
     @backgrounds = @user.backgrounds.map{|b| b.image.url}
     gon.backgrounds = @backgrounds
+    gon.facebook = @user.facebook
   end
 
   private

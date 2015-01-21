@@ -1,0 +1,39 @@
+doctype html
+html lang="en"
+  head
+    meta charset="utf-8" /
+    meta content="IE=edge" http-equiv="X-UA-Compatible" /
+    meta content="width=device-width, initial-scale=1" name="viewport" /
+    meta content="" name="description" /
+    meta content="" name="author" /
+    link href="../../favicon.ico" rel="icon" /
+    title Cover Template for Bootstrap
+    /! Bootstrap core CSS
+    link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" /
+    /! Custom styles for this template
+    = stylesheet_link_tag    'cover', media: 'all', 'data-turbolinks-track' => true
+  body
+    .site-wrapper
+      .site-wrapper-inner
+        .cover-container
+          .masthead.clearfix
+            .inner
+              h3.masthead-brand BallyHoo
+              nav
+                ul.nav.masthead-nav
+                  li.active
+                    a href="/"  Home
+                  li
+                    a href=new_user_session_path  Sign In
+          .inner.cover
+            h1.cover-heading 融入客戶生活，現在加入
+            p.lead
+              | BallyHoo 由一群充滿熱血的大學生所創，是您活動推廣的最佳幫手，
+              | 透過它您不需要再煩惱複雜的程式，簡單註冊，使用者就能留下和您的共同的回憶。
+            p.lead
+              a.btn.btn-lg.btn-primary href=new_user_registration_path  立即註冊
+    /!
+      | Bootstrap core JavaScript
+      | \==================================================
+    /! Placed at the end of the document so the pages load faster
+    /! IE10 viewport hack for Surface/desktop Windows 8 bug

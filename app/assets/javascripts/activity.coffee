@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(".activity.show").ready ->
   $('#myModalIntroduce').modal('show')
+
 $(document).on 'click', '.show-examples', ->
   $('#myModalIntroduce').modal('hide')
   $('#myModalSample').modal('show')

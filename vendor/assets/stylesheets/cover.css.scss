@@ -1,5 +1,4 @@
-body.welcome.index{
-  /*
+/*
  * Globals
  */
 
@@ -29,6 +28,7 @@ html,
 body {
   height: 100%;
   background-color: #333;
+  background-image: url(asset-path("bg-header.jpg"));
 }
 body {
   color: #fff;
@@ -160,47 +160,5 @@ body {
   .mastfoot,
   .cover-container {
     width: 700px;
-  }
-}
-}
-body.welcome.index2{
-  padding-top: 0px;
-  .carousel-inner img{
-    min-width: 100%;
-    max-width: 100%;
-    min-height: 100%;
-    min-width: 100%;
-  }
-
-  h1{
-    color: #f35626;
-    background-image: -webkit-linear-gradient(92deg,#f35626,#feab3a);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -webkit-animation: hue 60s infinite linear;
-    font-size: 200px;
-    position:absolute;
-    top: 45%;
-    left: 40%;
-    font-weight: 300;
-  }
-  .control_panel{
-    z-index: 100;
-    position:absolute;
-    right: 10%;
-    bottom: 10%;
-    width: 350px;
-    span{
-
-
-      display: block;
-      float:left;
-      padding: 20px;
-      background: rgba(255,255,255,0.4);
-      -webkit-border-radius: 20px;
-      -moz-border-radius: 20px;
-      border-radius: 20px;
-      margin: 10px;
-    }
   }
 }

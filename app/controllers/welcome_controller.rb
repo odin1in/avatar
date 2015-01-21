@@ -1,12 +1,9 @@
 class WelcomeController < ApplicationController
   def index
-    gon.backgrounds = ["CYCU1.jpg",
-                       "CYCU2.jpg",
-                       "CYCU3.JPG",
-                       "CYCU4.JPG",
-                       "CYCU5.JPG",
-                       "CYCU6.JPG",
-                       "CYCU7.JPG"]
+
+    redirect_to backgrounds_path and return if user_signed_in?
+
+    render layout: false
   end
 
   def index2
