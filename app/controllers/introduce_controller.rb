@@ -1,4 +1,4 @@
-class Admin::SampleController < Admin::ApplicationController
+class IntroduceController < ApplicationController
   before_action :set_user
 
   def edit
@@ -6,7 +6,7 @@ class Admin::SampleController < Admin::ApplicationController
 
   def update
     if @admin_user.update(admin_user_params)
-      redirect_to admin_sample_edit_path, notice: 'Sample was successfully updated.'
+      redirect_to introduce_edit_path, notice: 'Introduce was successfully updated.'
     else
       render :edit
     end
@@ -18,6 +18,6 @@ class Admin::SampleController < Admin::ApplicationController
     end
 
     def admin_user_params
-      params.require(:admin_user).permit(:sample)
+      params.require(:admin_user).permit(:introduce)
     end
 end

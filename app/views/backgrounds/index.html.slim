@@ -1,9 +1,9 @@
 .page-header
-  = link_to new_background_path, :class => 'btn btn-primary' do 
+  = link_to new_background_path, :class => 'btn btn-primary' do
     span.glyphicon.glyphicon-plus
     |  New Background
   h1
-    | Listing backgrounds
+    | Listing admin_backgrounds
 
 .table-responsive
   table.table.table-striped.table-bordered.table-hover
@@ -12,20 +12,25 @@
         th
           | Title
         th
+          | Preview
+        th
           | Status
         th
         th
         th
     tbody
-      - @backgrounds.each do | background |
+      - @admin_backgrounds.each do | admin_background |
         tr
           td
-            = background.title
+            = admin_background.title
           td
-            = background.status
+            div style="height: 200px;overflow:hidden;"
+              = image_tag(admin_background.image.url, width: 400)
           td
-            = link_to 'Show', background
+            = admin_background.status
           td
-            = link_to 'Edit', edit_background_path(background) 
+            = link_to 'Show', admin_background
           td
-            = link_to 'Destroy', background, method: :delete, data: { confirm: 'Are you sure?' } 
+            = link_to 'Edit', edit_background_path(admin_background)
+          td
+            = link_to 'Destroy', admin_background, method: :delete, data: { confirm: 'Are you sure?' }

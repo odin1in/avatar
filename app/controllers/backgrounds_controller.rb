@@ -1,4 +1,4 @@
-class Admin::BackgroundsController < Admin::ApplicationController
+class BackgroundsController < ApplicationController
   before_action :set_admin_background, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/backgrounds
@@ -28,7 +28,7 @@ class Admin::BackgroundsController < Admin::ApplicationController
 
     respond_to do |format|
       if @admin_background.save
-        format.html { redirect_to [:admin, @admin_background], notice: 'Background was successfully created.' }
+        format.html { redirect_to @admin_background, notice: 'Background was successfully created.' }
         format.json { render :show, status: :created, location: @admin_background }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class Admin::BackgroundsController < Admin::ApplicationController
   def update
     respond_to do |format|
       if @admin_background.update(admin_background_params)
-        format.html { redirect_to [:admin, @admin_background], notice: 'Background was successfully updated.' }
+        format.html { redirect_to @admin_background, notice: 'Background was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_background }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class Admin::BackgroundsController < Admin::ApplicationController
   def destroy
     @admin_background.destroy
     respond_to do |format|
-      format.html { redirect_to admin_backgrounds_url, notice: 'Background was successfully destroyed.' }
+      format.html { redirect_to backgrounds_url, notice: 'Background was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

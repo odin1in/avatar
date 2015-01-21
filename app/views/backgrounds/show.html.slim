@@ -1,18 +1,18 @@
 .page-header
-  = link_to backgrounds_path, :class => 'btn btn-default' do 
+  = link_to backgrounds_path, :class => 'btn btn-default' do
     span.glyphicon.glyphicon-list-alt
-    |  Back 
-  = link_to edit_background_path(@background), :class => 'btn btn-primary' do 
+    |  Back
+  = link_to edit_background_path(@admin_background), :class => 'btn btn-primary' do
     span.glyphicon.glyphicon-pencil
-    |  Edit 
+    |  Edit
   h1
-    | Show background
+    | Show admin_background
 dl.dl-horizontal
   dt
     | Title:
   dd
-    = @background.title
+    = @admin_background.title
   dt
     | Status:
   dd
-    = @background.status
+    = @admin_background.status

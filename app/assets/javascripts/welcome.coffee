@@ -8,6 +8,3 @@ $ ->
 $(document).on "click", ".showModel", ->
     $('#myModalIntroduce').modal()
 
-$(document).on "click", ".random_image", ->
-  background = gon.backgrounds[Math.floor(Math.random()*gon.backgrounds.length)]
-  $("#backgroundImg").attr("src", background)

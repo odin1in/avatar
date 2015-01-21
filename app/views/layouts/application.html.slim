@@ -17,40 +17,49 @@ html
     /! 載入html與canvas轉換函式庫
     = csrf_meta_tags
   body class="#{controller_name} #{action_name}"
-    = yield
-    / .navbar.navbar-inverse.navbar-fixed-top
-    /   .container
-    /     .navbar-header
-    /       button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-collapse"
-    /         span.sr-only
-    /           | Toggle navigation
-    /         span.icon-bar
-    /         span.icon-bar
-    /         span.icon-bar
-    /       = link_to "Avatar", "#", :class => "navbar-brand"
-    /     .collapse.navbar-collapse
-    /       ul.nav.navbar-nav
-    /         li.active
-    /           a href="#"
-    /             | Home
-    /         li
-    /           a href="#about"
-    /             | About
-    /         li
-    /           a href="#contact"
-    /             | Contact
-    /       ul.nav.navbar-nav.navbar-right
-    /         - if user_signed_in?
-    /           li
-    /             = link_to "Sign Out", destroy_user_session_path, method: :delete
-    /         - else
-    /           li
-    /             = link_to "Sign in", new_user_session_path
+    - if @no_panel
+      = yield
+    - else
+      .navbar.navbar-inverse.navbar-fixed-top
+        .container
+          .navbar-header
+            button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-collapse"
+              span.sr-only
+                | Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            = link_to "Ballyhoo", "#", :class => "navbar-brand"
+          .collapse.navbar-collapse
+            ul.nav.navbar-nav
+              li
+                a href=sample_edit_path
+                  | 範例
+              li
+                a href=introduce_edit_path
+                  | 活動辦法
+              li
+                a href=backgrounds_path
+                  | 背景圖
+              - if user_signed_in?
+                li
+                  a href=activity_path(current_user)
+                    | My Activity
+            ul.nav.navbar-nav.navbar-right
+              - if user_signed_in?
+                li
+                  = link_to "Sign Out", destroy_user_session_path, method: :delete
+              - else
+                li
+                  = link_to "Sign up", new_user_registration_path
+                li
+                  = link_to "Sign in", new_user_session_path
 
-    / .container
-    /   - flash.each do |name, msg|
-    /     = content_tag :div, :class => "alert alert-#{ name == :error ? "danger" : "success" } alert-dismissable" do
-    /       button.close type="button" data-dismiss="alert" aria-hidden="true"
-    /         | &times;
-    /       = msg
+      .container
+        - flash.each do |name, msg|
+          = content_tag :div, :class => "alert alert-#{ name == :error ? "danger" : "success" } alert-dismissable" do
+            button.close type="button" data-dismiss="alert" aria-hidden="true"
+              | &times;
+            = msg
+        = yield
 

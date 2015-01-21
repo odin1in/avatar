@@ -2,10 +2,10 @@
 
 
 /! 介面容器，含有所有操作按鈕與去背後的人物影像，以及背景影像
-#uiContainer
+#uiContainer data-current="0"
   /! 背景容器
   #backgroundContainer
-    = image_tag("front/CYCU1.jpg", id: "backgroundImg")
+    = image_tag(@backgrounds.first, id: "backgroundImg")
     / img#backgroundImg src="img\\CYCU1.jpg" /
     canvas#userViewerCanvas.streamImageCanvas
     canvas#backgroundRemovalCanvas.streamImageCanvas
@@ -71,9 +71,9 @@
     span
       = image_tag("front/home.png", style: 100)
     .commandButtonContent
-a.left.random_image href="#" style="position: fixed; left: 50px; top: 30%;font-size: 30px;color: white;"
+a.left.random_image_previous href="#" style="position: fixed; left: 50px; top: 30%;font-size: 30px;color: white;"
   span.glyphicon.glyphicon-chevron-left
-a.right.random_image href="#" style="position: fixed; right: 50px; top: 30%;font-size: 30px;color: white;"
+a.right.random_image_next href="#" style="position: fixed; right: 50px; top: 30%;font-size: 30px;color: white;"
   span.glyphicon.glyphicon-chevron-right
 / <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
 /   <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>

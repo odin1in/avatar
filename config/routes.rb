@@ -17,14 +17,14 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
   get 'welcome/index2'
+  patch 'sample/update'
+  get 'sample/edit'
+  get 'introduce/edit'
+  patch 'introduce/update'
   resources :activity, only: [:show]
+  resources :backgrounds
   namespace :admin do
     get '/', to: 'welcome#index'
-    get 'introduce/edit'
-    patch 'introduce/update'
-    patch 'sample/update'
-    get 'sample/edit'
-    resources :backgrounds
   end
 
   # Example of regular route:
